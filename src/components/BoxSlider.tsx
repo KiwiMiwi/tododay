@@ -77,7 +77,7 @@ function BoxSlider() {
 
     return (
         <>
-        {/*<Button onClick={() => { console.log(taskResource) } }>taskResource in Konsole ausgeben</Button>*/}
+        {/**/<Button onClick={() => { console.log(taskResource) } }>taskResource in Konsole ausgeben</Button>}
         <div className="boxWrapper">
             <Button className="editSettings" onClick={  handleMenu }><FontAwesomeIcon icon={faEllipsis} /> </Button>
             { taskResource != null ? 

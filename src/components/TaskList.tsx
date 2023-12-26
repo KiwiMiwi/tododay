@@ -6,14 +6,17 @@ import { useEffect, useState } from "react";
 import { taskList } from "../utils/resources";
 
 
-function TaskList(props: {taskListRes: taskList, callback: (task: string, label:string) => void}) {
+function TaskList(props: { date: string, taskListRes: taskList, callback: (task: string, label:string) => void}) {
   const [taskAmount, setTaskAmount] = useState<number | null>(null);
   const [singleTaskElements, setSingleTaskElements] = useState<JSX.Element[]>([]);
+  const [ dateTitle, setDateTitle ] = useState<string>("")
 
   function load(){
-    if(taskAmount == null) setTaskAmount(Object.keys(props.taskListRes).length);
+    if(props.taskListRes != null && Object.keys(props.taskListRes).length != singleTaskElements.length) setTaskAmount(Object.keys(props.taskListRes).length);
+    if(taskAmount == null || (dateTitle != props.date && props.taskListRes != null )) setTaskAmount(Object.keys(props.taskListRes).length);
+    if(dateTitle == "" || dateTitle != props.date) setDateTitle(props.date); 
 
-    if(props.taskListRes != null && taskAmount != null){
+    if(props.taskListRes != null && taskAmount != null && singleTaskElements.length != taskAmount){
       //console.log("amount wurde geändert "+taskAmount)
         let elements: JSX.Element[] = [];
         for (let i = 1; i <= taskAmount; i++) {
@@ -26,7 +29,7 @@ function TaskList(props: {taskListRes: taskList, callback: (task: string, label:
           } else {
             props.callback("", name);
           }
-        }console.log(elements)
+        }
         setSingleTaskElements(elements);
           
     }
@@ -35,13 +38,13 @@ function TaskList(props: {taskListRes: taskList, callback: (task: string, label:
   useEffect(() => {
     load();
     
-  }, [taskAmount, props.taskListRes])
+  }, [taskAmount, singleTaskElements, props.taskListRes, dateTitle])
 
   if(taskAmount == null) return (<></>);
 
   return (
     <div>
-      {/*<Button onClick={() => { console.log(props.taskListRes) } }>props.taskListRes in Konsole ausgeben</Button>*/}
+      {/**/<Button onClick={() => { console.log(props.taskListRes); console.log(taskAmount); console.log(singleTaskElements.length) } }>props.taskListRes in Konsole ausgeben</Button>}
       
       <InputGroup>
         {singleTaskElements}

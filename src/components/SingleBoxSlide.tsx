@@ -9,7 +9,7 @@ function SingleBoxSlide(props: { date: string, taskListRes: taskList, callback: 
         <Card>
           <Card.Body>
             <Card.Title>{ props.date }</Card.Title>
-            <TaskList callback={props.callback} taskListRes={props.taskListRes} />
+            <TaskList callback={props.callback} taskListRes={props.taskListRes} date={props.date} />
           </Card.Body>
         </Card>
       );
