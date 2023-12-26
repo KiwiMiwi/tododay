@@ -59,7 +59,7 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
             <Form.Control ref={textInputRef} type="text" className="singleTaskText" value={taskDescription} placeholder={props.label} disabled={editTaskClass == "" ? true : false} onChange={(e) => handleTaskDescription(e)} />
           </label>
           
-        {/*<Button onClick={() => { console.log("props.description ",props.description) } }>descr in Konsole ausgeben</Button>*/}
+        {/*<Button onClick={() => { console.log("props.description taskDescription",props.description+",", taskDescription) } }>descr in Konsole ausgeben</Button>*/}
         <Button className={editTaskClass+" editTask"} onClick={handleMenu}>
           <FontAwesomeIcon icon={faPen} /> 
         </Button>

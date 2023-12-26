@@ -60,8 +60,6 @@ function BoxSlider() {
     }
 
     function handleTaskList(task: string, label: string){
-        
-        console.log("wird noch auferufen")
         if(taskResource != null && taskResource[dateTitle] != null){
             if(taskResource[dateTitle].hasOwnProperty(label)){
                 taskResource[dateTitle][label]["description"] = task;
