@@ -37,13 +37,6 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
     load();
   }, [editTaskClass, taskDescription]); //TODO: isChecked muss auch gespeichert werden
 
-  /*
-  // TODO: abhängig von props.description machen! und nur ein useEffect verwenden!
-  useEffect(() => {
-    if(props.taskListRes["task1"]["description"] != null) setTaskDescription(props.taskListRes["task1"]["description"]) 
-  }, [props.taskListRes]);
-  */
-
   useEffect(() => {
     
     if(props.description != null) setTaskDescription(props.description) 
@@ -55,7 +48,7 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
       <div className="checkbox-wrapper">
         
           <label>
-            <input type="checkbox"  checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} className={isChecked ? "checked" : ""}/>
+            <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} className={isChecked ? "checked" : ""}/>
             <Form.Control ref={textInputRef} type="text" className="singleTaskText" value={taskDescription} placeholder={props.label} disabled={editTaskClass == "" ? true : false} onChange={(e) => handleTaskDescription(e)} />
           </label>
           

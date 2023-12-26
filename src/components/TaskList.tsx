@@ -59,7 +59,7 @@ useEffect(() => {
 
   return (
     <div>
-      {/**/<Button onClick={() => { console.log(props.taskListRes); console.log(taskAmount); console.log(singleTaskElements.length) } }>props.taskListRes in Konsole ausgeben</Button>}
+      {/*<Button onClick={() => { console.log(props.taskListRes); console.log(taskAmount); console.log(singleTaskElements.length) } }>props.taskListRes in Konsole ausgeben</Button>*/}
       
       <InputGroup>
         {singleTaskElements}
