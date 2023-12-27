@@ -59,15 +59,18 @@ function BoxSlider() {
         }
     }
 
-    function handleTaskList(task: string, label: string){
+    function handleTaskList(task: string, label: string, check: boolean){
         if(taskResource != null && taskResource[dateTitle] != null){
             if(taskResource[dateTitle].hasOwnProperty(label)){
                 taskResource[dateTitle][label]["description"] = task;
+                taskResource[dateTitle][label]["done"] = check;
             } else {
                 taskResource[dateTitle][label] = {"description": "","done": false}
             }
         }
     }
+    
+
 
     useEffect(() => {
         load();
@@ -75,7 +78,7 @@ function BoxSlider() {
 
     return (
         <>
-        {/*<Button onClick={() => { console.log(taskResource) } }>taskResource in Konsole ausgeben</Button>*/}
+        {/**/<Button onClick={() => { console.log(taskResource) } }>taskResource in Konsole ausgeben</Button>}
         <div className="boxWrapper">
             <Button className="editSettings" onClick={  handleMenu }><FontAwesomeIcon icon={faEllipsis} /> </Button>
             { taskResource != null ? 

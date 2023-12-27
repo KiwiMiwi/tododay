@@ -4,18 +4,18 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { taskList } from "../utils/resources";
 
-function SingleTask(props: { taskListRes: taskList, description: string, done: boolean, label :string, name:string, callback: (task: string, label:string) => void}) {
+function SingleTask(props: { taskListRes: taskList, description: string, done: boolean, label :string, name:string, callback: (task: string, label:string, check: boolean) => void}) {
   const [isChecked, setIsChecked] = useState(props.done);
   const [taskDescription, setTaskDescription] = useState<string | null>(null);
   const [editTaskClass, setEditTaskClass] = useState<string>("");
   const [saveTaskClass, setSaveTaskClass] = useState<string>("d-none");
+
+  // if (document.getElementById('clickbox').contains(e.target))
  
   const textInputRef = useRef<HTMLInputElement>(null);
   function load(){
-    if (taskDescription != "" && taskDescription != null) props.callback(taskDescription, props.name);
-    if (textInputRef.current != null) {
-      textInputRef.current.focus();
-    }
+    if (taskDescription != "" && taskDescription != null) props.callback(taskDescription, props.name, isChecked);
+
   }
 
   function handleTaskDescription(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
@@ -23,11 +23,27 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
     setTaskDescription(value);
   }
 
+  function handleTaskCheck(e: ChangeEvent<HTMLInputElement>){
+    
+    const value = e.target.checked;
+    //setIsChecked((prev) => !prev)
+    
+    setIsChecked(value);
+    if(taskDescription != null){//console.log("wert wurde geändert: "+value);
+      props.callback(taskDescription, props.name, value);
+    } 
+  }  
+
   const handleMenu = () => {
-    if(editTaskClass == ""){
+    
+      
+    if (textInputRef.current != null && editTaskClass == "") textInputRef.current.focus();
+    
+    if(editTaskClass == "" && textInputRef.current == document.activeElement){
       setEditTaskClass("d-none");
       setSaveTaskClass("");
-    } else {
+      
+    } else if(editTaskClass != "" && textInputRef.current != document.activeElement) {
       setEditTaskClass("");
       setSaveTaskClass("d-none");
     }
@@ -35,12 +51,21 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
 
   useEffect(() => {
     load();
-  }, [editTaskClass, taskDescription]); //TODO: isChecked muss auch gespeichert werden
+  }, [editTaskClass, taskDescription, isChecked]); //TODO: isChecked muss auch gespeichert werden
 
   useEffect(() => {
+    if (textInputRef.current != null && editTaskClass != "") {
+      textInputRef.current.focus();
+    }
+  }, [editTaskClass])
+
+  useEffect(() => {
+    setEditTaskClass("");
+    setSaveTaskClass("d-none");
     
     if(props.description != null) setTaskDescription(props.description) 
-  }, [props.description, props.taskListRes]);
+    if(props.done != null) setIsChecked(props.done) 
+  }, [props.description, props.done, props.taskListRes]);
 
   if(taskDescription == null) return (<></>);
 
@@ -48,20 +73,28 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
       <div className="checkbox-wrapper">
         
           <label>
-            <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} className={isChecked ? "checked" : ""}/>
-            <Form.Control ref={textInputRef} type="text" className="singleTaskText" value={taskDescription} placeholder={props.label} disabled={editTaskClass == "" ? true : false} onChange={(e) => handleTaskDescription(e)} />
+            <input type="checkbox" checked={isChecked} onChange={(e) => handleTaskCheck(e)}  className={isChecked ? "checked" : ""}/>
+            <Form.Control ref={textInputRef} type="text" onClick={handleMenu} className="singleTaskText" value={taskDescription} placeholder={props.label} disabled={isChecked ? true : false} onChange={(e) => handleTaskDescription(e)} />
           </label>
           
         {/*<Button onClick={() => { console.log("props.description taskDescription",props.description+",", taskDescription) } }>descr in Konsole ausgeben</Button>*/}
-        <Button className={editTaskClass+" editTask"} onClick={handleMenu}>
-          <FontAwesomeIcon icon={faPen} /> 
-        </Button>
-        <Button className={saveTaskClass+" editTask checkTask"} onClick={handleMenu}  >
-          <FontAwesomeIcon icon={faCheck} className={saveTaskClass} onClick={handleMenu}/> 
-        </Button>
-        <Button className={saveTaskClass+" editTask removeTask"} onClick={handleMenu}>
-          <FontAwesomeIcon icon={faTrash} className={saveTaskClass} /> 
-        </Button>
+        {
+          !isChecked ? 
+          <>
+            <Button className={editTaskClass+" editTask"} onClick={handleMenu}>
+              <FontAwesomeIcon icon={faPen} /> 
+            </Button>
+            <Button className={saveTaskClass+" editTask checkTask"} onClick={handleMenu}  >
+              <FontAwesomeIcon icon={faCheck} className={saveTaskClass} onClick={handleMenu}/> 
+            </Button>
+            <Button className={saveTaskClass+" editTask removeTask"} onClick={handleMenu}>
+              <FontAwesomeIcon icon={faTrash} className={saveTaskClass} /> 
+            </Button>
+          </>
+          : 
+          <></>
+        }
+
         
           
       </div>

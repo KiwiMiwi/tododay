@@ -2,7 +2,7 @@ import { Card} from "react-bootstrap";
 import TaskList from "./TaskList";
 import { taskList } from "../utils/resources";
 
-function SingleBoxSlide(props: { date: string, taskListRes: taskList, callback: (task: string, label:string) => void}) {
+function SingleBoxSlide(props: { date: string, taskListRes: taskList, callback: (task: string, label:string, check: boolean) => void}) {
   
     return (
         <Card>

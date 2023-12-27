@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { taskList } from "../utils/resources";
 
 
-function TaskList(props: { date: string, taskListRes: taskList, callback: (task: string, label:string) => void}) {
+function TaskList(props: { date: string, taskListRes: taskList, callback: (task: string, label:string, check: boolean) => void}) {
   const [taskAmount, setTaskAmount] = useState<number | null>(null);
   const [singleTaskElements, setSingleTaskElements] = useState<JSX.Element[]>([]);
   const [ dateTitle, setDateTitle ] = useState<string>("")
@@ -27,7 +27,7 @@ function TaskList(props: { date: string, taskListRes: taskList, callback: (task:
                 <SingleTask taskListRes={props.taskListRes} key={name} label={label} name={name} description={props.taskListRes[name]["description"]} done={props.taskListRes[name]["done"]} callback={props.callback} />
             );   
           } else {
-            props.callback("", name);
+            props.callback("", name, false);
           }
         }
         setSingleTaskElements(elements);
