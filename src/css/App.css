@@ -13,6 +13,10 @@
     width: 100%;
     min-height: 500px;
   }
+
+  .editSettings {
+    display: none;
+  }
 }
 @media only screen and (min-width: 769px) {
   .card {
@@ -24,8 +28,9 @@
   }
 
   .boxWrapper {
-    margin: 100px auto 0 auto;
-    width: 30rem
+    margin: 0 auto;
+    width: 30rem;
+    padding-top: 100px;
   }
 
   .slideLeft {
@@ -54,7 +59,7 @@
 .menuWrapper {
   border: 1px solid;
   position: absolute;
-  top: -2em;
+  top: 4.7em;
   right: -11em;
   width: 10em;
 }
@@ -93,7 +98,7 @@
 .editSettings {
   position: absolute;
   right: 0;
-  top: -1.1em;
+  top: 2.2em;
   background-color: transparent;
   border: none;
   font-size: 30px;
@@ -113,16 +118,8 @@
 }
 
 
-
-
-
-
-
-
-
 .card-body .card-title {
   padding: 20px;
-  border: 1px solid;
   margin: 20px;
   font-size: 40px;
   font-weight: bold;
@@ -190,7 +187,7 @@ input.checked::before {
 
 .singleTaskText {
   border-color: transparent;
-  
+  background-color: transparent;
   border-radius: 0;
   font-size: 1rem;
   color: #000
@@ -205,5 +202,13 @@ input.checked::before {
 }
 
 button {
+  cursor: pointer;
+}
+
+body {
+  height: 100vh;
+}
+
+.menuWrapper {
   cursor: pointer;
 }

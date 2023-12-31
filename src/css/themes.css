@@ -1,0 +1,152 @@
+/* AURORA BOREALIS */
+
+body.aurora  {
+    background: rgb(34,50,64);
+    background: -moz-linear-gradient(0deg, rgba(34,50,64,1) 0%, rgba(96,191,129,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(34,50,64,1) 0%, rgba(96,191,129,1) 100%);
+    background: linear-gradient(0deg, rgba(34,50,64,1) 0%, rgba(96,191,129,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#223240",endColorstr="#60bf81",GradientType=1);
+    background-repeat: no-repeat;
+}
+
+.aurora .card {
+    background-color: #223240;
+    box-shadow: inset 0px 0px 10px -1px #000000;
+
+}
+.aurora .card-title, .aurora .editSettings {
+    color: #223240;
+    text-shadow: -1px -1px 1px rgba(147, 217, 78,.3), 1px 1px 1px rgba(34, 50, 64,0.9);
+}
+.aurora .card {
+   border-color: transparent; 
+}
+
+.aurora .card-title {
+    box-shadow: 0px 0px 3px 1px #60bf81;
+}
+
+.aurora .slideButton {
+    color: #60BF81;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 80px;
+}
+
+.aurora .slideRight {
+
+    right: -80px;
+}
+
+.aurora .slideLeft {
+    left: -80px;
+}
+
+.aurora .card-title {
+    background-color: #347355;
+    -webkit-box-shadow: inset 0px 0px 5px 3px #60BF81;
+    box-shadow: inset 0px 0px 5px 3px #60BF81;
+}
+
+.aurora .singleTaskText, .aurora input.checked, .aurora input.checked::before, .aurora .addTaskBtn, .aurora .singleTaskText:focus {
+    color: #60bf81
+}
+
+.aurora .editTask {
+    color: #60BF81;
+}
+
+.aurora .checkbox-wrapper label {
+    border-bottom-color: #60bf81
+}
+.aurora .singleTaskText::placeholder {
+    color: #347355
+}
+
+.aurora .checkbox-wrapper input[type="checkbox"] {
+    border-color: #347355
+}
+
+.aurora .menuWrapper {
+    background-color: #60BF81;
+}
+
+
+/* AURORA BOREALIS */
+
+
+/* CATS */
+
+ body.cats {
+    background-image: url('../images/meowers_outline.png');
+    background-repeat: repeat;
+    background-color: cornflowerblue;
+}
+
+@media only screen and (min-width: 769px){
+    .cats .card {
+        width: 29.2em;
+    }
+}
+
+.cats .card {
+    background-color: white;
+    border-width: 7px;
+}
+
+.cats .card-title {
+    border-bottom: 2px dashed;
+}
+
+.cats .slideLeft {
+    transform: rotate(270deg);
+}
+.cats .slideRight {
+    transform: rotate(90deg);
+}
+
+.cats .slideButton, .cats .editSettings svg {
+    background-color: #000;
+    color: #FFF;
+    border: 3px solid #FFF;
+}
+
+.cats .editSettings svg {
+    border-radius: 13px;
+    width: 60px;
+    height: 20px;
+}
+
+.cats .menuWrapper {
+    background-color: #fff;
+}
+
+/* CATS */
+
+/* DARK MODE */
+
+body.dark {
+    background-color: #0e0d0c
+}
+
+.dark .card {
+    background-color: #1e1c19
+}
+
+.dark .singleTaskText {
+    color: #7063a3;  
+}
+
+.dark .menuWrapper, .dark .editSettings {
+    color: #bf7171;
+}
+
+.dark .slideButton {
+ background-color: transparent;
+    border-color: transparent;
+    color: #7063a3;   
+}
+
+
+
+/*  */

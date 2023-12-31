@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import SingleBoxSlide from "./SingleBoxSlide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faEllipsis, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { getDateStringTitle, getDateToday, getDateTomorrow, getDateYesterday } from "../utils/script";
 import { tasksOfDay } from "../utils/resources";
@@ -12,6 +12,7 @@ function BoxSlider() {
     const [date, setDate] = useState<Date | null>(null);
     const [menuClasses, setMenuClasses] = useState<string>("menuWrapper d-none");
     const [taskResource, setTaskResource] = useState<tasksOfDay | null>(null);
+    const [theme, setTheme] = useState<string>("dark");
 
     const emptyTaskList: tasksOfDay = {
         [dateTitle]: {
@@ -49,6 +50,9 @@ function BoxSlider() {
                 })
             }
         }
+
+        const node = document.getElementsByTagName("body") as HTMLCollection;
+        node[0].className = theme;
     }
 
     function handleMenu() {
@@ -59,6 +63,12 @@ function BoxSlider() {
         }
     }
 
+    function handleTheme() {
+        const themes = ["dark", "aurora", "cats", "blank"]
+        const i = themes.indexOf(theme) + 1
+        i == themes.length ? setTheme(themes[0]) : setTheme(themes[i])
+    }
+    
     function handleTaskList(task: string, label: string, check: boolean) {
         if (taskResource != null && taskResource[dateTitle] != null) {
             if (taskResource[dateTitle].hasOwnProperty(label)) {
@@ -72,7 +82,7 @@ function BoxSlider() {
 
     useEffect(() => {
         load();
-    }, [date, dateTitle, taskResource])
+    }, [date, dateTitle, taskResource, theme])
 
     return (
             <div className="boxWrapper">
@@ -89,15 +99,23 @@ function BoxSlider() {
                         <Button className="slideButton slideRight"> <FontAwesomeIcon icon={faCaretRight} /> </Button>
                     </>
                     :
-                    <>
-                        <Button className="slideButton slideLeft" onClick={() => setDate(getDateYesterday(date))}> <FontAwesomeIcon icon={faCaretLeft} /> </Button>
-                        <Button className="slideButton slideRight" onClick={() => setDate(getDateTomorrow(date))}> <FontAwesomeIcon icon={faCaretRight} /> </Button>
+                    <>                                                                                                       
+                        <Button className="slideButton slideLeft" onClick={() => setDate(getDateYesterday(date))}> 
+                            { theme == "cats" ? 
+                                <FontAwesomeIcon icon={faPaw} /> : <FontAwesomeIcon icon={faCaretLeft} /> 
+                            }
+                        </Button>
+                        <Button className="slideButton slideRight" onClick={() => setDate(getDateTomorrow(date))}> 
+                            { theme == "cats" ? 
+                                <FontAwesomeIcon icon={faPaw} /> : <FontAwesomeIcon icon={faCaretRight} /> 
+                            }
+                        </Button>
                     </>
                 }
 
                 <div className={menuClasses}>
                     <ul>
-                        <li>
+                        <li onClick={handleTheme}>
                             Change Theme
                         </li>
                         <li>

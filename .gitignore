@@ -25,5 +25,5 @@ yarn-error.log*
 
 # images (for now)
 /images
-/src/images
+/src/images/fish
 background.css
