@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { faPen, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
@@ -12,7 +13,7 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
 
   const textInputRef = useRef<HTMLInputElement>(null);
   function load() {
-    if (taskDescription != "" && taskDescription != null) props.callback(taskDescription, props.name, isChecked);
+    if (taskDescription !== "" && taskDescription != null) props.callback(taskDescription, props.name, isChecked);
 
   }
 
@@ -31,12 +32,12 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
 
   const handleMenu = () => {
 
-    if (textInputRef.current != null && editTaskClass == "") textInputRef.current.focus();
+    if (textInputRef.current != null && editTaskClass === "") textInputRef.current.focus();
 
-    if (editTaskClass == "" && textInputRef.current == document.activeElement) {
+    if (editTaskClass === "" && textInputRef.current === document.activeElement) {
       setEditTaskClass("d-none");
       setSaveTaskClass("");
-    } else if (editTaskClass != "" && textInputRef.current != document.activeElement) {
+    } else if (editTaskClass !== "" && textInputRef.current !== document.activeElement) {
       setEditTaskClass("");
       setSaveTaskClass("d-none");
     }
@@ -47,7 +48,7 @@ function SingleTask(props: { taskListRes: taskList, description: string, done: b
   }, [editTaskClass, taskDescription, isChecked]); //TODO: isChecked muss auch gespeichert werden
 
   useEffect(() => {
-    if (textInputRef.current != null && editTaskClass != "") {
+    if (textInputRef.current != null && editTaskClass !== "") {
       textInputRef.current.focus();
     }
   }, [editTaskClass])

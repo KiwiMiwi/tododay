@@ -1,30 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "react-bootstrap";
 import SingleBoxSlide from "./SingleBoxSlide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight, faEllipsis, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { getDateStringTitle, getDateToday, getDateTomorrow, getDateYesterday } from "../utils/script";
-import { tasksOfDay } from "../utils/resources";
+import { taskListDaily } from "../utils/resources";
 
 
 function BoxSlider() {
     const [dateTitle, setDateTitle] = useState<string>("")
     const [date, setDate] = useState<Date | null>(null);
     const [menuClasses, setMenuClasses] = useState<string>("menuWrapper d-none");
-    const [taskResource, setTaskResource] = useState<tasksOfDay | null>(null);
+    const [taskResource, setTaskResource] = useState<taskListDaily | null>(null);
     const [theme, setTheme] = useState<string>("dark");
 
-    const emptyTaskList: tasksOfDay = {
+    const emptyTaskList: taskListDaily = {
         [dateTitle]: {
-            ["task1"]: {
+            "task1": {
                 "description": "",
                 "done": false
             },
-            ["task2"]: {
+            "task2": {
                 "description": "",
                 "done": false
             },
-            ["task3"]: {
+            "task3": {
                 "description": "",
                 "done": false
             }
@@ -38,7 +39,7 @@ function BoxSlider() {
         }
         if (date) setDateTitle(getDateStringTitle(date));
 
-        if (taskResource == null && dateTitle != "") {
+        if (taskResource == null && dateTitle !== "") {
             setTaskResource(emptyTaskList);
         }
 
@@ -56,7 +57,7 @@ function BoxSlider() {
     }
 
     function handleMenu() {
-        if (menuClasses == "menuWrapper") {
+        if (menuClasses === "menuWrapper") {
             setMenuClasses("menuWrapper d-none");
         } else {
             setMenuClasses("menuWrapper");
@@ -66,7 +67,7 @@ function BoxSlider() {
     function handleTheme() {
         const themes = ["dark", "aurora", "cats", "blank"]
         const i = themes.indexOf(theme) + 1
-        i == themes.length ? setTheme(themes[0]) : setTheme(themes[i])
+        i === themes.length ? setTheme(themes[0]) : setTheme(themes[i])
     }
     
     function handleTaskList(task: string, label: string, check: boolean) {
@@ -101,12 +102,12 @@ function BoxSlider() {
                     :
                     <>                                                                                                       
                         <Button className="slideButton slideLeft" onClick={() => setDate(getDateYesterday(date))}> 
-                            { theme == "cats" ? 
+                            { theme === "cats" ? 
                                 <FontAwesomeIcon icon={faPaw} /> : <FontAwesomeIcon icon={faCaretLeft} /> 
                             }
                         </Button>
                         <Button className="slideButton slideRight" onClick={() => setDate(getDateTomorrow(date))}> 
-                            { theme == "cats" ? 
+                            { theme === "cats" ? 
                                 <FontAwesomeIcon icon={faPaw} /> : <FontAwesomeIcon icon={faCaretRight} /> 
                             }
                         </Button>

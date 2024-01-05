@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputGroup, Button } from "react-bootstrap";
@@ -12,12 +13,12 @@ function TaskList(props: { date: string, taskListRes: taskList, callback: (task:
   const [dateTitle, setDateTitle] = useState<string>("")
 
   function load() {
-    if (props.taskListRes != null && Object.keys(props.taskListRes).length != singleTaskElements.length) setTaskAmount(Object.keys(props.taskListRes).length);
-    if (taskAmount == null || (dateTitle != props.date && props.taskListRes != null)) setTaskAmount(Object.keys(props.taskListRes).length);
-    if (dateTitle == "" || dateTitle != props.date) setDateTitle(props.date);
+    if (props.taskListRes != null && Object.keys(props.taskListRes).length !== singleTaskElements.length) setTaskAmount(Object.keys(props.taskListRes).length);
+    if (taskAmount == null || (dateTitle !== props.date && props.taskListRes != null)) setTaskAmount(Object.keys(props.taskListRes).length);
+    if (dateTitle === "" || dateTitle !== props.date) setDateTitle(props.date);
     if (taskAmount == null) setTaskAmount(Object.keys(props.taskListRes).length);
 
-    if (taskAmount != null && props.taskListRes != null && singleTaskElements.length != taskAmount) {
+    if (taskAmount != null && props.taskListRes != null && singleTaskElements.length !== taskAmount) {
       let elements: JSX.Element[] = [];
       for (let i = 1; i <= taskAmount; i++) {
         const name = "task" + (i);

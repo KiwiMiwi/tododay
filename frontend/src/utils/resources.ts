@@ -5,6 +5,6 @@ export interface taskList {
     }
 }
 
-export interface tasksOfDay {
+export interface taskListDaily {
     [key: string]: taskList
 }
