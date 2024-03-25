@@ -1,8 +1,7 @@
 import { InferSchemaType, Schema, model } from "mongoose";
 
 const taskListSchema = new Schema({
-    date: { type: String, required: true },
-    task: { type: Schema.Types.ObjectId, required: true, ref: "task" }
+    date: { type: String, required: true }
 }, {timestamps: true});
 
 type TaskList = InferSchemaType<typeof taskListSchema>;
